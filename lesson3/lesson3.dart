@@ -17,10 +17,10 @@ import 'dart:collection';
 
 final patternVariable = RegExp(r'^[a-zA-Z]$');
 final patternOperand = RegExp(r'[\d.]');
-final patternOperator = RegExp(r'^[\+\-\*\/()]$');
+final patternOperator = RegExp(r'^[\+\-\*/()_]$');
 
 final patternPriorityLow = RegExp(r'^[()]$');
-final patternPriorityMiddle = RegExp(r'^[\+\-]$');
+final patternPriorityMiddle = RegExp(r'^[+-_]$');
 final patternPriorityHigh = RegExp(r'^[*\/]$');
 
 enum ChunkType { operator, operand }
@@ -35,7 +35,14 @@ class Calc {
   setVariablesMap(Map<String, double> variablesMap) =>
       _variablesMap = variablesMap;
 
-  static Map<String, int> priority = {'(': 0, '+': 1, '-': 1, '*': 2, '/': 2};
+  static Map<String, int> priority = {
+    '(': 0,
+    '+': 1,
+    '-': 1,
+    '_': 1,
+    '*': 2,
+    '/': 2
+  };
 
   static getChunkType(String chunk) {
     if (patternOperand.hasMatch(chunk) || patternVariable.hasMatch(chunk)) {
@@ -93,6 +100,7 @@ class Calc {
     operatorQueue.toList().reversed.forEach((chunk) {
       reverseEndlessList.add(chunk);
     });
+    print(reverseEndlessList);
     return reverseEndlessList;
   }
 
@@ -103,8 +111,13 @@ class Calc {
     for (var chunk in reversePolandList) {
       ChunkType chunkType = getChunkType(chunk);
       if (chunkType == ChunkType.operator) {
+        if (chunk == '_') {
+          results.addLast(-1);
+          chunk = '*';
+        }
         num operandB = results.removeLast();
         num operandA = results.removeLast();
+        print('$operandA $operandB');
         switch (chunk) {
           case '+':
             result = operandA + operandB;
@@ -143,5 +156,8 @@ void main() {
   print(calc.calculate());
   calc.setExpression('3*x+15/(3+2)');
   print(calc._expression);
+  print(calc.calculate());
+  // unary operator (_)
+  calc.setExpression('(_x*(_3)-5)/5');
   print(calc.calculate());
 }
