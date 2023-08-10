@@ -39,9 +39,9 @@ class Calc {
     '(': 0,
     '+': 1,
     '-': 1,
-    '_': 1,
     '*': 2,
-    '/': 2
+    '/': 2,
+    '_': 3
   };
 
   static getChunkType(String chunk) {
@@ -142,7 +142,7 @@ class Calc {
 }
 
 void main() {
-  var calc = Calc.expression('1+(4-2)*3');
+  var calc = Calc.expression('1+(4-2)*_3');
   print(calc._expression);
   print(calc.calculate());
   calc.setExpression('10*5+4/2-1');
@@ -156,6 +156,6 @@ void main() {
   print(calc._expression);
   print(calc.calculate());
   // unary operator (_)
-  calc.setExpression('(_x*(_3)-5)/5');
+  calc.setExpression('(_x*_3-5)/5');
   print(calc.calculate());
 }
