@@ -100,7 +100,6 @@ class Calc {
     operatorQueue.toList().reversed.forEach((chunk) {
       reverseEndlessList.add(chunk);
     });
-    print(reverseEndlessList);
     return reverseEndlessList;
   }
 
@@ -117,7 +116,6 @@ class Calc {
         }
         num operandB = results.removeLast();
         num operandA = results.removeLast();
-        print('$operandA $operandB');
         switch (chunk) {
           case '+':
             result = operandA + operandB;
