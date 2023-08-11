@@ -15,14 +15,6 @@
 
 import 'dart:collection';
 
-final patternVariable = RegExp(r'^[a-zA-Z]$');
-final patternOperand = RegExp(r'[\d.]');
-final patternOperator = RegExp(r'^[\+\-\*/()_]$');
-
-final patternPriorityLow = RegExp(r'^[()]$');
-final patternPriorityMiddle = RegExp(r'^[+-_]$');
-final patternPriorityHigh = RegExp(r'^[*\/]$');
-
 enum ChunkType { operator, operand }
 
 class Calc {
@@ -43,6 +35,14 @@ class Calc {
     '/': 2,
     '_': 3
   };
+
+  static RegExp patternVariable = RegExp(r'^[a-zA-Z]$');
+  static RegExp patternOperand = RegExp(r'[\d.]');
+  static RegExp patternOperator = RegExp(r'^[\+\-\*/()_]$');
+
+  static RegExp patternPriorityLow = RegExp(r'^[()]$');
+  static RegExp patternPriorityMiddle = RegExp(r'^[+-_]$');
+  static RegExp patternPriorityHigh = RegExp(r'^[*\/]$');
 
   static getChunkType(String chunk) {
     if (patternOperand.hasMatch(chunk) || patternVariable.hasMatch(chunk)) {
@@ -157,5 +157,6 @@ void main() {
   print(calc.calculate());
   // unary operator (_)
   calc.setExpression('(_x*_3-5)/5');
+  print(calc._expression);
   print(calc.calculate());
 }
