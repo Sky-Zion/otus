@@ -40,10 +40,6 @@ class Calc {
   static RegExp patternOperand = RegExp(r'[\d.]');
   static RegExp patternOperator = RegExp(r'^[\+\-\*/()_]$');
 
-  static RegExp patternPriorityLow = RegExp(r'^[()]$');
-  static RegExp patternPriorityMiddle = RegExp(r'^[+-_]$');
-  static RegExp patternPriorityHigh = RegExp(r'^[*\/]$');
-
   static getChunkType(String chunk) {
     if (patternOperand.hasMatch(chunk) || patternVariable.hasMatch(chunk)) {
       return ChunkType.operand;
