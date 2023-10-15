@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lesson8/entity_list.dart';
+import 'package:lesson8/item_list.dart';
 
 void main() {
   runApp(const MainApp());
@@ -24,17 +24,17 @@ class MainApp extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(flex: 1, child: Column()),
+                      const Expanded(flex: 1, child: Column()),
                       Expanded(
                           flex: 28,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Expanded(flex: 1, child:EntityList())
+                              Expanded(flex: 1, child:ItemList())
                               ],
                           )),
-                      Expanded(flex: 1, child: Column()),
+                      const Expanded(flex: 1, child: Column()),
                     ],
                   )
                   // child: const Entity()

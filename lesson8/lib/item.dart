@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 
-class Entity extends StatelessWidget {
+import 'constants.dart';
+
+//ignore: must_be_immutable
+class Item extends StatelessWidget {
   late Image? image;
   late String? imagePath;
   late String? description;
   late int? time;
 
-  Entity({this.imagePath, this.description, this.time, super.key}) {
+  Item({this.imagePath, this.description, this.time, super.key}) {
     if (imagePath != null) {
       image = Image(image: AssetImage(imagePath!));
     }
   }
 
   static double widgetHeight = 136;
-  static Color backgroundColor = const Color.fromARGB(255, 236, 236, 236);
-  static Color entityBackgroundColor = const Color.fromARGB(255, 255, 255, 255);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: Constants.backgroundColor,
         body: Align(
           alignment: Alignment.center,
           child: ClipRRect(
@@ -28,7 +29,7 @@ class Entity extends StatelessWidget {
                 padding: const EdgeInsets.all(1),
                 height: 136,
                 width: double.infinity,
-                color: entityBackgroundColor,
+                color: Constants.entityBackgroundColor,
                 child: Row(children: [
                   SizedBox(width: 149, height: widgetHeight, child: image),
                   Expanded(
@@ -48,9 +49,7 @@ class Entity extends StatelessWidget {
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18)))),
-                            Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Expanded(
+                            Expanded(
                                     child: Row(
                                   children: [
                                     Container(
@@ -60,13 +59,12 @@ class Entity extends StatelessWidget {
                                                 'assets/images/clock.png'))),
                                     Text('$time минут',
                                         maxLines: 2,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16,
-                                            color: Color.fromARGB(
-                                                255, 46, 204, 113)))
+                                            color: Constants.cookTimeColor))
                                   ],
-                                )))
+                                ))
                           ])))
                 ]),
               )),
